@@ -14,7 +14,7 @@ class GbparsePipeline:
     def process_item(self, item, spider):
         return item
 
-class HHPipeline:
+class MongoPipeline:
     def __init__(self):
         db_client = MongoClient('mongodb://localhost:27017')
         self.db = db_client['youla_parse']
@@ -27,21 +27,12 @@ class HHPipeline:
 class GbparseImagesPipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
-        images = item.get('img',
-                          item['data'].get('profile_pic_url',
-                                           item['data'].get('display_url',
-                                                            []
-                                                            )
-                                           )
-                          )
-
-        if not isinstance(images, list):
-            images = [images]
-        for url in images:
-            try:
-                yield Request(url)
-            except Exception as e:
-                print(e)
+        if item.get('img'):
+            for url in item.get('img'):
+                try:
+                    yield Request(url)
+                except Exception as e:
+                    print(e)
 
     def item_completed(self, results, item, info):
         try:

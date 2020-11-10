@@ -1,7 +1,7 @@
 from itemloaders.processors import TakeFirst, MapCompose
 from scrapy.loader import ItemLoader
 from scrapy import Selector
-from .items import HHCompanyItem, HHVacancyItem
+from .items import HHCompanyItem, HHVacancyItem, InstagramTagItem
 
 def eraser_symbols(itm):
     result = itm.replace('\xa0', '')
