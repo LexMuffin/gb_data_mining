@@ -46,3 +46,11 @@ class InstagramUserItem(scrapy.Item):
     username = scrapy.Field()
     follow_id = scrapy.Field()
     follow_username = scrapy.Field()
+
+class InstagramFollowItem(scrapy.Item):
+    _id = scrapy.Field()
+    username_id = scrapy.Field()
+    username = scrapy.Field()
+    follow_id = scrapy.Field()
+    follow_name = scrapy.Field()
+
